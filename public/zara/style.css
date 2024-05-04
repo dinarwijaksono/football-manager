@@ -681,6 +681,11 @@ aside ul li:hover {
 
 /* end box */
 
+.my-\[100px\] {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
 .mt-\[100px\] {
   margin-top: 100px;
 }
@@ -691,6 +696,10 @@ aside ul li:hover {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .inline-block {
@@ -707,6 +716,10 @@ aside ul li:hover {
 
 .basis-4\/12 {
   flex-basis: 33.333333%;
+}
+
+.basis-4 {
+  flex-basis: 1rem;
 }
 
 .justify-end {
@@ -788,12 +801,30 @@ aside ul li:hover {
   padding-bottom: 0.25rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .text-center {
   text-align: center;
 }
 
 .text-\[14px\] {
   font-size: 14px;
+}
+
+.text-\[13px\] {
+  font-size: 13px;
+}
+
+.font-\[14px\] {
+  font-weight: 14px;
 }
 
 .italic {

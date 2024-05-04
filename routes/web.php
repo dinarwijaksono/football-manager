@@ -14,4 +14,6 @@ Route::get('/', [HomeController::class, 'index'])->middleware(HasSessionProfileM
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(MissingSessionProfileMiddleware::class);
 
 Route::get('/create-profile', [ProfileController::class, 'create'])->middleware(MissingSessionProfileMiddleware::class);
+
+Route::get('/load-profile', [ProfileController::class, 'load'])->middleware(MissingSessionProfileMiddleware::class);
 // End ProfileController

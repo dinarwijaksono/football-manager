@@ -15,4 +15,9 @@ class ProfileController extends Controller
     {
         return view('profile.create');
     }
+
+    public function load()
+    {
+        return view('profile.load');
+    }
 }
