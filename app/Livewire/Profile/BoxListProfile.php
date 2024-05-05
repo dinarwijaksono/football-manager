@@ -3,6 +3,7 @@
 namespace App\Livewire\Profile;
 
 use App\Models\Club;
+use App\Models\DateRun;
 use App\Models\Division;
 use App\Models\Profile;
 use App\Models\TemporaryPosition;
@@ -76,6 +77,7 @@ class BoxListProfile extends Component
             Division::where('profile_id', $profileId)->delete();
             Club::where("profile_id", $profileId)->delete();
             TemporaryPosition::where('profile_id', $profileId)->delete();
+            DateRun::where("profile_id", $profileId)->delete();
 
             DB::commit();
 

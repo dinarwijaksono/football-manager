@@ -4,6 +4,7 @@ namespace Tests\Feature\Livewire\Profile;
 
 use App\Livewire\Profile\BoxListProfile;
 use App\Models\Club;
+use App\Models\DateRun;
 use App\Models\Division;
 use App\Models\Profile;
 use App\Models\TemporaryPosition;
@@ -92,5 +93,8 @@ class BoxListProfileTest extends TestCase
 
         $temporaryPosition = TemporaryPosition::select('*')->get();
         $this->assertTrue($temporaryPosition->isEmpty());
+
+        $dateRun = DateRun::select('*')->where('profile_id', $this->profile->id)->get();
+        $this->assertTrue($dateRun->isEmpty());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Profile;
 
+use App\Models\DateRun;
 use App\Models\Profile;
 use App\Service\ClubService;
 use App\Service\DivisionService;
@@ -50,6 +51,13 @@ class FormCreateProfile extends Component
 
             $temporaryPositionService = APP::make(TemporaryPositionService::class);
             $temporaryPositionService->generateFromClub($id);
+
+            DateRun::insert([
+                'profile_id' => $id,
+                'date' => mktime(0, 0, 0, 1, 1, 2000),
+                'created_at' => round(microtime(true) * 1000),
+                'updated_at' => round(microtime(true) * 1000),
+            ]);
 
             session()->put('profile_id', $id);
             session()->put('profile_name', trim($this->name));
