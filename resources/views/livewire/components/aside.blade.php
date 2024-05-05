@@ -2,7 +2,7 @@
 
     <div class="profile">
         <h3 class="text-white mb-0">{{ session()->get('profile_name') }}</h3>
-        <p class="text-[14px] mt-0 text-white">Lorem, ipsum.</p>
+        <p class="text-[14px] mt-0 text-white">{{ session()->get('club_managed_name') }}</p>
     </div>
 
     <hr class="my-5 mx-3">
