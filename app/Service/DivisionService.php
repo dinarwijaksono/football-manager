@@ -32,7 +32,7 @@ class DivisionService
                     'profile_id' => $profileId,
                     'country' => $division[0],
                     'level' => $division[1],
-                    'name' => $division[2],
+                    'name' => trim($division[2]),
                     'created_at' => round(microtime(true) * 1000),
                     'updated_at' => round(microtime(true) * 1000)
                 ];
