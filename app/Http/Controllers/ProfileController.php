@@ -20,4 +20,9 @@ class ProfileController extends Controller
     {
         return view('profile.load');
     }
+
+    public function selectClub()
+    {
+        return view('profile.select-club');
+    }
 }

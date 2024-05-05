@@ -3,6 +3,8 @@
 namespace Tests\Feature\Livewire\Profile;
 
 use App\Livewire\Profile\FormCreateProfile;
+use App\Models\Club;
+use App\Models\Division;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -20,11 +22,21 @@ class FormCreateProfileTest extends TestCase
     {
         Livewire::test(FormCreateProfile::class)
             ->set('name', 'test')
-            ->call('doCreateProfile');
+            ->call('doCreateProfile')
+            ->assertRedirect('/profile-select-club');
 
         $this->assertDatabaseHas('profiles', [
             'name' => 'test'
         ]);
+
+        $division = Division::select('*')->get();
+        $club = Club::select('*')->get();
+
+        $this->assertTrue($division->isNotEmpty());
+        $this->assertTrue($club->isNotEmpty());
+
+        $this->assertTrue(session()->has('profile_id'));
+        $this->assertTrue(session()->has('profile_name'));
     }
 
     public function test_do_create_profile_validate()

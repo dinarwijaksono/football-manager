@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Profile;
 
+use App\Models\Club;
+use App\Models\Division;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -34,12 +36,14 @@ class BoxListProfile extends Component
         try {
             Profile::where('id', $profileId)->delete();
 
-            session()->flash('deleteSuccess', 'Profile berhasil di hapus.');
-
             $this->profiles = Profile::select('id', 'name', 'managed_club', 'created_at', 'updated_at')
                 ->orderByDesc('created_at')
                 ->get();
 
+            Division::where('profile_id', $profileId)->delete();
+            Club::where("profile_id", $profileId)->delete();
+
+            session()->flash('deleteSuccess', 'Profile berhasil di hapus.');
             Log::info('Do delete profile success');
         } catch (\Throwable $th) {
             Log::error('Do delete profile failed', [
