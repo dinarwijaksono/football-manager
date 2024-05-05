@@ -20,7 +20,8 @@
                     </div>
 
                     <div class="basis-4/12">
-                        <button class="bg-blue-500 w-full text-white text-[14px] py-1 ">Muat</button>
+                        <button type="button" wire:click="doLoadProfile({{ $key->id }})"
+                            class="bg-blue-500 w-full text-white text-[14px] py-1 ">Muat</button>
                     </div>
                 </div>
             </div>

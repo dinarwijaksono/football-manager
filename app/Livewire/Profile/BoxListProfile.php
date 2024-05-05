@@ -31,6 +31,33 @@ class BoxListProfile extends Component
         Log::withContext(['class' => BoxListProfile::class]);
     }
 
+    public function doLoadProfile(int $profileId)
+    {
+        try {
+            $profile = Profile::select('id', 'name', 'managed_club')
+                ->where('id', $profileId)
+                ->first();
+
+            session()->put('profile_id', $profile->id);
+            session()->put('profile_name', $profile->name);
+
+            if ($profile->managed_club != null) {
+                $club = Club::select('id', 'name')->first();
+
+                session()->put('club_managed_id', $club->id);
+                session()->put('club_managed_name', $club->name);
+            }
+
+            return redirect('/');
+
+            Log::info('do load profile success');
+        } catch (\Throwable $th) {
+            Log::error('Do Load Profile failed', [
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
+
     public function doDeleteProfile(int $profileId)
     {
         try {

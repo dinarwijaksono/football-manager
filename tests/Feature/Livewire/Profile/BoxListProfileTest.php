@@ -42,6 +42,38 @@ class BoxListProfileTest extends TestCase
             ->assertStatus(200);
     }
 
+
+    public function test_do_load_profile_success_managed_null()
+    {
+        Livewire::test(BoxListProfile::class)
+            ->call('doLoadProfile', $this->profile->id);
+
+        $this->assertEquals($this->profile->id, session()->get('profile_id'));
+        $this->assertEquals($this->profile->name, session()->get('profile_name'));
+
+        $this->assertTrue(session()->missing('club_managed_id'));
+        $this->assertTrue(session()->missing('club_managed_name'));
+    }
+
+    public function test_do_load_profile_success_managed_not_null()
+    {
+        $club = Club::select('id')
+            ->where('profile_id', $this->profile->id)
+            ->first();
+
+        Profile::where('id', $this->profile->id)->update(['managed_club' => $club->id]);
+
+        Livewire::test(BoxListProfile::class)
+            ->call('doLoadProfile', $this->profile->id);
+
+        $this->assertEquals($this->profile->id, session()->get('profile_id'));
+        $this->assertEquals($this->profile->name, session()->get('profile_name'));
+
+        $this->assertTrue(session()->has('club_managed_id'));
+        $this->assertTrue(session()->has('club_managed_name'));
+    }
+
+
     public function test_do_delete_profile()
     {
         $this->assertDatabaseHas('profiles', [
