@@ -24,12 +24,6 @@ class TemporaryPositionServiceTest extends TestCase
         $this->seed(ProfileSeeder::class);
         $this->profile = Profile::select('*')->first();
 
-        $divisionService = $this->app->make(DivisionService::class);
-        $divisionService->importDivisionFromCSV($this->profile->id);
-
-        $clubService = $this->app->make(ClubService::class);
-        $clubService->importClubFromCSV($this->profile->id);
-
         $this->temporaryPositionService = $this->app->make(TemporaryPositionService::class);
     }
 

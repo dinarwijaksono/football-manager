@@ -73,7 +73,7 @@ class BoxListProfile extends Component
 
             Division::where('profile_id', $profileId)->delete();
             Club::where("profile_id", $profileId)->delete();
-            TemporaryPosition::where('profile_id')->delete();
+            TemporaryPosition::where('profile_id', $profileId)->delete();
 
             DB::commit();
 

@@ -27,15 +27,6 @@ class BoxTemporaryStandingBigTest extends TestCase
         session()->put('profile_id', $this->profile->id);
         session()->put('profile_name', $this->profile->name);
 
-        $divisionService = $this->app->make(DivisionService::class);
-        $divisionService->importDivisionFromCSV($this->profile->id);
-
-        $clubService = $this->app->make(ClubService::class);
-        $clubService->importClubFromCSV($this->profile->id);
-
-        session()->put('profile_id', $this->profile->id);
-        session()->put('profile_name', $this->profile->name);
-
         $club = Club::select('*')->first();
 
         session()->put('club_managed_id', $club->id);

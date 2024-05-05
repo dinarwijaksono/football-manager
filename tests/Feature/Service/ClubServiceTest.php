@@ -25,9 +25,6 @@ class ClubServiceTest extends TestCase
         $this->seed(ProfileSeeder::class);
         $this->profile = Profile::select('*')->first();
 
-        $divisionService = $this->app->make(DivisionService::class);
-        $divisionService->importDivisionFromCSV($this->profile->id);
-
         $this->clubService = $this->app->make(ClubService::class);
     }
 

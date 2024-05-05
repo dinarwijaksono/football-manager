@@ -29,12 +29,6 @@ class SelectClubTest extends TestCase
 
         session()->put('profile_id', $this->profile->id);
         session()->put('profile_name', $this->profile->name);
-
-        $this->divisionService = $this->app->make(DivisionService::class);
-        $this->divisionService->importDivisionFromCSV($this->profile->id);
-
-        $this->clubService = $this->app->make(ClubService::class);
-        $this->clubService->importClubFromCSV($this->profile->id);
     }
 
     public function test_renders_successfully()

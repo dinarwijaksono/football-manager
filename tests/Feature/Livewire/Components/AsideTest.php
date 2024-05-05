@@ -28,17 +28,8 @@ class AsideTest extends TestCase
 
         $this->profile = Profile::select('*')->first();
 
-        $this->divisionService = $this->app->make(DivisionService::class);
-        $this->divisionService->importDivisionFromCSV($this->profile->id);
-
-        $this->clubService = $this->app->make(ClubService::class);
-        $this->clubService->importClubFromCSV($this->profile->id);
-
         $club = Club::select('*')->where("profile_id", $this->profile->id)->first();
         Profile::where('id', $this->profile->id)->update(['managed_club' => $club->id]);
-
-        $this->clubService = $this->app->make(ClubService::class);
-        $this->clubService->importClubFromCSV($this->profile->id);
 
         session()->put('profile_id', $this->profile->id);
         session()->put('profile_name', $this->profile->name);

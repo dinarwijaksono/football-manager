@@ -29,12 +29,6 @@ class BoxListProfileTest extends TestCase
         $this->seed(ProfileSeeder::class);
 
         $this->profile = Profile::select('*')->first();
-
-        $this->divisionService = $this->app->make(DivisionService::class);
-        $this->divisionService->importDivisionFromCSV($this->profile->id);
-
-        $this->clubService = $this->app->make(ClubService::class);
-        $this->clubService->importClubFromCSV($this->profile->id);
     }
 
     public function test_renders_successfully()
