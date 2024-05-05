@@ -59,7 +59,7 @@
     }
 
     nav ul li.btn button {
-        @apply text-white rounded px-2 text-[14px]
+        @apply text-white
     }
 
     /* end navbar */

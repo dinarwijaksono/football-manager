@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DateRun;
 use App\Models\Profile;
 use App\Service\ClubService;
 use App\Service\DivisionService;
@@ -36,5 +37,12 @@ class ProfileSeeder extends Seeder
 
         $temporaryPositionService = App::make(TemporaryPositionService::class);
         $temporaryPositionService->generateFromClub($profile->id);
+
+        DateRun::insert([
+            'profile_id' => $profile->id,
+            'date' => mktime(0, 0, 0, 1, 1, 2000),
+            'created_at' => round(microtime(true) * 100),
+            'updated_at' => round(microtime(true) * 100),
+        ]);
     }
 }
