@@ -5,6 +5,7 @@ namespace App\Livewire\Profile;
 use App\Models\Profile;
 use App\Service\ClubService;
 use App\Service\DivisionService;
+use App\Service\TemporaryPositionService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +33,8 @@ class FormCreateProfile extends Component
 
         try {
 
+            DB::beginTransaction();
+
             $id = DB::table('profiles')->insertGetId([
                 'name' => trim($this->name),
                 'managed_club' => null,
@@ -45,13 +48,19 @@ class FormCreateProfile extends Component
             $clubService = App::make(ClubService::class);
             $clubService->importClubFromCSV($id);
 
+            $temporaryPositionService = APP::make(TemporaryPositionService::class);
+            $temporaryPositionService->generateFromClub($id);
+
             session()->put('profile_id', $id);
             session()->put('profile_name', trim($this->name));
+
+            DB::commit();
 
             Log::info('do create profile success');
 
             return redirect('/profile-select-club');
         } catch (\Throwable $th) {
+            DB::rollBack();
             Log::error('do create profile failed', [
                 'message' => $th->getMessage()
             ]);

@@ -5,6 +5,7 @@ namespace Tests\Feature\Livewire\Profile;
 use App\Livewire\Profile\FormCreateProfile;
 use App\Models\Club;
 use App\Models\Division;
+use App\Models\TemporaryPosition;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -31,9 +32,11 @@ class FormCreateProfileTest extends TestCase
 
         $division = Division::select('*')->get();
         $club = Club::select('*')->get();
+        $temporaryPosition = TemporaryPosition::select('*')->get();
 
         $this->assertTrue($division->isNotEmpty());
         $this->assertTrue($club->isNotEmpty());
+        $this->assertTrue($temporaryPosition->isNotEmpty());
 
         $this->assertTrue(session()->has('profile_id'));
         $this->assertTrue(session()->has('profile_name'));
