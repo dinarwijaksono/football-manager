@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return "Home/index";
+        session()->put('page_is_active', 'dashboard');
+
+        return view('home.index');
     }
 }
