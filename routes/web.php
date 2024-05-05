@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\HasProfileManagedClubMiddleware;
@@ -21,3 +22,7 @@ Route::get('/load-profile', [ProfileController::class, 'load'])->middleware(Miss
 
 Route::get('/profile-select-club', [ProfileController::class, 'selectClub'])->middleware(HasSessionProfileMiddleware::class);
 // End ProfileController
+
+// competitionController
+Route::get('/competition', [CompetitionController::class, 'index'])->middleware(HasSessionProfileMiddleware::class);
+// End competitionController

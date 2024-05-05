@@ -12,8 +12,10 @@
             <li @class(['active' => session()->get('page_is_active') == 'dashboard'])>Dashboard</li>
         </a>
 
-        <a href="/">
-            <li>Heading</li>
+        <a href="/competition">
+            <li @class([
+                'active' => session()->get('page_is_active') == 'compotition',
+            ])>Kompetisi</li>
         </a>
 
         <a href="/">
