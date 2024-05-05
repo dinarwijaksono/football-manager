@@ -6,6 +6,7 @@ use App\Livewire\Profile\BoxListProfile;
 use App\Models\Club;
 use App\Models\Division;
 use App\Models\Profile;
+use App\Models\TemporaryPosition;
 use App\Service\ClubService;
 use App\Service\DivisionService;
 use Database\Seeders\ProfileSeeder;
@@ -94,5 +95,8 @@ class BoxListProfileTest extends TestCase
 
         $club = Club::select('*')->get();
         $this->assertTrue($club->isEmpty());
+
+        $temporaryPosition = TemporaryPosition::select('*')->get();
+        $this->assertTrue($temporaryPosition->isEmpty());
     }
 }

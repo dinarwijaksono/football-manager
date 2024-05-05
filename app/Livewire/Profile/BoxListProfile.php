@@ -5,6 +5,8 @@ namespace App\Livewire\Profile;
 use App\Models\Club;
 use App\Models\Division;
 use App\Models\Profile;
+use App\Models\TemporaryPosition;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -61,6 +63,8 @@ class BoxListProfile extends Component
     public function doDeleteProfile(int $profileId)
     {
         try {
+            DB::beginTransaction();
+
             Profile::where('id', $profileId)->delete();
 
             $this->profiles = Profile::select('id', 'name', 'managed_club', 'created_at', 'updated_at')
@@ -69,10 +73,16 @@ class BoxListProfile extends Component
 
             Division::where('profile_id', $profileId)->delete();
             Club::where("profile_id", $profileId)->delete();
+            TemporaryPosition::where('profile_id')->delete();
+
+            DB::commit();
 
             session()->flash('deleteSuccess', 'Profile berhasil di hapus.');
+
             Log::info('Do delete profile success');
         } catch (\Throwable $th) {
+            DB::rollBack();
+
             Log::error('Do delete profile failed', [
                 'message' => $th->getMessage()
             ]);
