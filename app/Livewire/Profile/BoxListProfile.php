@@ -44,7 +44,9 @@ class BoxListProfile extends Component
             session()->put('profile_name', $profile->name);
 
             if ($profile->managed_club != null) {
-                $club = Club::select('id', 'name')->first();
+                $club = Club::select('id', 'name')
+                    ->where('id', $profile->managed_club)
+                    ->first();
 
                 session()->put('club_managed_id', $club->id);
                 session()->put('club_managed_name', $club->name);
