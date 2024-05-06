@@ -665,14 +665,6 @@ nav ul li {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-nav ul li:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
-  text-decoration-line: underline;
-}
-
 nav ul li.active {
   text-decoration-line: underline;
 }
@@ -951,19 +943,14 @@ aside ul li.active {
   padding-right: 0.5rem;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 
 .text-center {
@@ -978,20 +965,12 @@ aside ul li.active {
   font-size: 14px;
 }
 
-.text-\[18px\] {
-  font-size: 18px;
-}
-
-.text-\[17px\] {
-  font-size: 17px;
-}
-
 .text-\[16px\] {
   font-size: 16px;
 }
 
-.text-\[20px\] {
-  font-size: 20px;
+.text-\[17px\] {
+  font-size: 17px;
 }
 
 .font-bold {

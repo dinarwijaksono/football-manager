@@ -4,6 +4,7 @@ namespace Tests\Feature\Livewire\Components;
 
 use App\Livewire\Components\Navbar;
 use App\Models\Club;
+use App\Models\DateRun;
 use App\Models\Profile;
 use Database\Seeders\ProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,5 +33,17 @@ class NavbarTest extends TestCase
     {
         Livewire::test(Navbar::class)
             ->assertStatus(200);
+    }
+
+    public function test_do_next_day()
+    {
+        Livewire::test(Navbar::class)
+            ->call('doNextDay')
+            ->assertRedirect('/');
+
+        $date = mktime(0, 0, 0, 1, 1, 2000) + (24 * 60 * 60);
+        $dateRun = DateRun::select('id', 'date')->where('profile_id', session()->get('profile_id'))->first();
+
+        $this->assertEquals($date, $dateRun->date);
     }
 }

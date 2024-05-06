@@ -47,7 +47,7 @@
     }
 
     nav ul li {
-        @apply inline-block px-1 mr-1 text-white hover:bg-slate-200 hover:text-slate-700 hover:underline
+        @apply inline-block px-1 mr-1 text-white
     }
 
     nav ul li.active {

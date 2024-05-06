@@ -7,10 +7,11 @@
         <div class="basis-10/12">
             <ul>
 
-                <li class="font-bold text-[16px]">{{ date('J F Y', $date->date) }}</li>
+                <li class="font-bold text-[16px]">{{ date('j F Y', $date->date) }}</li>
 
                 <li class="btn">
-                    <button class="bg-blue-600 text-[17px] hover:bg-blue-800 px-5">Next day</button>
+                    <button type="button" wire:click="doNextDay"
+                        class="bg-blue-600 text-[17px] hover:bg-blue-800 px-5">Next day</button>
                 </li>
 
             </ul>
