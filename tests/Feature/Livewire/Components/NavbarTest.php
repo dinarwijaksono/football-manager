@@ -6,6 +6,7 @@ use App\Livewire\Components\Navbar;
 use App\Models\Club;
 use App\Models\DateRun;
 use App\Models\Profile;
+use App\Models\Timetable;
 use Database\Seeders\ProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -14,15 +15,17 @@ use Tests\TestCase;
 
 class NavbarTest extends TestCase
 {
+    public $profile;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->seed(ProfileSeeder::class);
 
-        $profile = Profile::select('*')->first();
-        session()->put('profile_id', $profile->id);
-        session()->put('profile_name', $profile->name);
+        $this->profile = Profile::select('*')->first();
+        session()->put('profile_id', $this->profile->id);
+        session()->put('profile_name', $this->profile->name);
 
         $club = Club::select("*")->first();
         session()->put('club_managed_id', $club->id);
@@ -45,5 +48,16 @@ class NavbarTest extends TestCase
         $dateRun = DateRun::select('id', 'date')->where('profile_id', session()->get('profile_id'))->first();
 
         $this->assertEquals($date, $dateRun->date);
+    }
+
+    public function test_make_timetable()
+    {
+        for ($i = 0; $i < 2; $i++) {
+            Livewire::test(Navbar::class)
+                ->call('doNextDay');
+        }
+
+        $timetable = Timetable::select('*')->where('profile_id', $this->profile->id)->get();
+        $this->assertTrue($timetable->isNotEmpty());
     }
 }
