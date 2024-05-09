@@ -7,6 +7,7 @@ use App\Models\DateRun;
 use App\Models\Timetable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 class TimetableService
 {
@@ -73,6 +74,26 @@ class TimetableService
             Log::info('generate timetable from csv success');
         } catch (\Throwable $th) {
             Log::error('generate timetable from csv failed', [
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function playMatch(int $timetableId)
+    {
+        try {
+            self::boot();
+
+            Timetable::where('id', $timetableId)->update([
+                'is_play' => true,
+                'score_home' => random_int(0, 10),
+                'score_away' => random_int(0, 10),
+                'updated_at' => round(microtime(true) * 1000),
+            ]);
+
+            Log::info('play match success');
+        } catch (\Throwable $th) {
+            Log::error('play match failed', [
                 'message' => $th->getMessage()
             ]);
         }
