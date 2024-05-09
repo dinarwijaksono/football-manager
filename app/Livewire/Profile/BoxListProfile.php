@@ -7,6 +7,7 @@ use App\Models\DateRun;
 use App\Models\Division;
 use App\Models\Profile;
 use App\Models\TemporaryPosition;
+use App\Models\Timetable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -68,8 +69,6 @@ class BoxListProfile extends Component
         try {
             DB::beginTransaction();
 
-            Profile::where('id', $profileId)->delete();
-
             $this->profiles = Profile::select('id', 'name', 'managed_club', 'created_at', 'updated_at')
                 ->orderByDesc('created_at')
                 ->get();
@@ -78,10 +77,14 @@ class BoxListProfile extends Component
             Club::where("profile_id", $profileId)->delete();
             TemporaryPosition::where('profile_id', $profileId)->delete();
             DateRun::where("profile_id", $profileId)->delete();
+            Timetable::where('profile_id', $profileId)->delete();
+            Profile::where('id', $profileId)->delete();
 
             DB::commit();
 
             session()->flash('deleteSuccess', 'Profile berhasil di hapus.');
+
+            $this->dispatch('do-delete-profile')->self();
 
             Log::info('Do delete profile success');
         } catch (\Throwable $th) {

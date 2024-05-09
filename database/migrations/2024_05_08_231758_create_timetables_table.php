@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreignId('division_id');
             $table->string('period', 10);
             $table->bigInteger('date');
-            $table->integer('home');
-            $table->integer('away');
+            $table->integer('home_id');
+            $table->string('home_name');
+            $table->integer('away_id');
+            $table->string('away_name');
             $table->boolean('is_play');
             $table->integer('score_home');
             $table->integer('score_away');

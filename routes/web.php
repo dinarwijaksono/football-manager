@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TimetableController;
 use App\Http\Middleware\HasProfileManagedClubMiddleware;
 use App\Http\Middleware\HasSessionProfileMiddleware;
 use App\Http\Middleware\MissingSessionProfileMiddleware;
@@ -26,3 +27,7 @@ Route::get('/profile-select-club', [ProfileController::class, 'selectClub'])->mi
 // competitionController
 Route::get('/competition', [CompetitionController::class, 'index'])->middleware(HasSessionProfileMiddleware::class);
 // End competitionController
+
+// TimetableController
+Route::get('/timetable', [TimetableController::class, 'index'])->middleware(HasSessionProfileMiddleware::class);
+// TimetableController

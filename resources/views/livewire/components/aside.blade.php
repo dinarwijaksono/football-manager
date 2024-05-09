@@ -18,8 +18,10 @@
             ])>Kompetisi</li>
         </a>
 
-        <a href="/">
-            <li>Colors</li>
+        <a href="/timetable">
+            <li @class([
+                'active' => session()->get('page_is_active') == 'timetable',
+            ])>Jadwal</li>
         </a>
     </ul>
 

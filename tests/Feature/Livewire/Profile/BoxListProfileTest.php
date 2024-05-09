@@ -2,12 +2,14 @@
 
 namespace Tests\Feature\Livewire\Profile;
 
+use App\Livewire\Components\Navbar;
 use App\Livewire\Profile\BoxListProfile;
 use App\Models\Club;
 use App\Models\DateRun;
 use App\Models\Division;
 use App\Models\Profile;
 use App\Models\TemporaryPosition;
+use App\Models\Timetable;
 use App\Service\ClubService;
 use App\Service\DivisionService;
 use Database\Seeders\ProfileSeeder;
@@ -96,5 +98,8 @@ class BoxListProfileTest extends TestCase
 
         $dateRun = DateRun::select('*')->where('profile_id', $this->profile->id)->get();
         $this->assertTrue($dateRun->isEmpty());
+
+        $timetable = Timetable::select('*')->where('profile_id', $this->profile->id)->get();
+        $this->assertTrue($timetable->isEmpty());
     }
 }
