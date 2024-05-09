@@ -29,6 +29,7 @@ class TimetableService
                 'F', 'G', 'H', 'I', 'J',
                 'K', 'L', 'M', 'N', 'O',
                 'P', 'Q', 'R', 'S', 'T',
+                'U', 'V', 'W', 'X'
             ];
 
             $file = Storage::disk('local');
@@ -36,11 +37,6 @@ class TimetableService
                 $file = $file->get('timetable/liga-20-team.csv');
             } elseif ($clubs->count() == 24) {
                 $file = $file->get('timetable/liga-24-team.csv');
-
-                $team[] = ['U'];
-                $team[] = ['V'];
-                $team[] = ['W'];
-                $team[] = ['X'];
             }
 
             $file = explode(PHP_EOL, $file);
@@ -57,10 +53,10 @@ class TimetableService
                     'division_id' => $divisionId,
                     'period' => date('Y', $year->date),
                     'date' => $data[2] * 24 * 60 * 60 + $date,
-                    'home_id' => $clubs[array_search($data[0], $team)]->id,
-                    'home_name' => $clubs[array_search($data[0], $team)]->name,
-                    'away_id' => $clubs[array_search($data[1], $team)]->id,
-                    'away_name' => $clubs[array_search($data[1], $team)]->name,
+                    'home_id' => $clubs[array_search(trim($data[0]), $team)]->id,
+                    'home_name' => $clubs[array_search(trim($data[0]), $team)]->name,
+                    'away_id' => $clubs[array_search(trim($data[1]), $team)]->id,
+                    'away_name' => $clubs[array_search(trim($data[1]), $team)]->name,
                     'is_play' => false,
                     'score_home' => 0,
                     'score_away' => 0,

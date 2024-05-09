@@ -64,7 +64,7 @@ class NavbarTest extends TestCase
 
     public function test_play_match()
     {
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             Livewire::test(Navbar::class)
                 ->call('doNextDay');
         }

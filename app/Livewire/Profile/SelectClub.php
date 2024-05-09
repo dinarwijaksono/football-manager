@@ -24,6 +24,7 @@ class SelectClub extends Component
                 'divisions.name as division_name',
                 'clubs.name as club_name'
             )
+            ->where('clubs.profile_id', session()->get('profile_id'))
             ->orderBy('divisions.country')
             ->orderBy('divisions.level')
             ->get();

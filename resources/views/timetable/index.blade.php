@@ -30,20 +30,20 @@
                         </div>
                         <div class="basis-2/12 ">
                             @if ($key->home_id == $clubManagedId)
-                                @if ($key->score_home = $key->score_away)
+                                @if ($key->score_home == $key->score_away)
                                     <span class="text-slate-500">Draw</span>
                                 @elseif ($key->score_home > $key->score_away)
-                                    <span class="text-slate-500">Menang</span>
+                                    <span class="text-green-500">Menang</span>
                                 @else
-                                    <span class="text-slate-500">Kalah</span>
+                                    <span class="text-red-500">Kalah</span>
                                 @endif
                             @else
-                                @if ($key->score_home = $key->score_away)
+                                @if ($key->score_home == $key->score_away)
                                     <span class="text-slate-500">Draw</span>
                                 @elseif ($key->score_home < $key->score_away)
-                                    <span class="text-slate-500">Menang</span>
+                                    <span class="text-green-500">Menang</span>
                                 @else
-                                    <span class="text-slate-500">Kalah</span>
+                                    <span class="text-red-500">Kalah</span>
                                 @endif
                             @endif
                         </div>
