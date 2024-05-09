@@ -53,23 +53,24 @@ class TemporaryPositionServiceTest extends TestCase
         $data->away_id = $away->id;
 
         $this->temporaryPositionService->update($data);
+        $this->temporaryPositionService->update($data);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $home->id,
-            'point' => 1,
-            'draw' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 4,
-            'gol_out' => 4
+            'point' => 2,
+            'draw' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 8,
+            'gol_out' => 8
         ]);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $away->id,
-            'point' => 1,
-            'draw' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 4,
-            'gol_out' => 4
+            'point' => 2,
+            'draw' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 8,
+            'gol_out' => 8
         ]);
     }
 
@@ -88,23 +89,24 @@ class TemporaryPositionServiceTest extends TestCase
         $data->away_id = $away->id;
 
         $this->temporaryPositionService->update($data);
+        $this->temporaryPositionService->update($data);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $home->id,
-            'point' => 3,
-            'win' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 4,
-            'gol_out' => 2
+            'point' => 6,
+            'win' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 8,
+            'gol_out' => 4
         ]);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $away->id,
             'point' => 0,
-            'lost' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 2,
-            'gol_out' => 4
+            'lost' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 4,
+            'gol_out' => 8
         ]);
     }
 
@@ -123,24 +125,25 @@ class TemporaryPositionServiceTest extends TestCase
         $data->away_id = $away->id;
 
         $this->temporaryPositionService->update($data);
+        $this->temporaryPositionService->update($data);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $home->id,
             'point' => 0,
             'win' => 0,
-            'lost' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 1,
-            'gol_out' => 7
+            'lost' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 2,
+            'gol_out' => 14
         ]);
 
         $this->assertDatabaseHas('temporary_positions', [
             'club_id' => $away->id,
-            'point' => 3,
-            'win' => 1,
-            'number_of_match' => 1,
-            'gol_in' => 7,
-            'gol_out' => 1
+            'point' => 6,
+            'win' => 2,
+            'number_of_match' => 2,
+            'gol_in' => 14,
+            'gol_out' => 2
         ]);
     }
 }

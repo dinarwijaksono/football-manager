@@ -6,6 +6,7 @@ use App\Livewire\Components\Navbar;
 use App\Models\Club;
 use App\Models\DateRun;
 use App\Models\Profile;
+use App\Models\TemporaryPosition;
 use App\Models\Timetable;
 use Database\Seeders\ProfileSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -59,5 +60,25 @@ class NavbarTest extends TestCase
 
         $timetable = Timetable::select('*')->where('profile_id', $this->profile->id)->get();
         $this->assertTrue($timetable->isNotEmpty());
+    }
+
+    public function test_play_match()
+    {
+        for ($i = 0; $i < 30; $i++) {
+            Livewire::test(Navbar::class)
+                ->call('doNextDay');
+        }
+
+        $timetable = Timetable::select('*')
+            ->where('profile_id', $this->profile->id)
+            ->where('is_play', true)
+            ->get();
+        $this->assertTrue($timetable->isNotEmpty());
+
+        $temporaryPositions = TemporaryPosition::select('*')
+            ->where('profile_id', $this->profile->id)
+            ->where('number_of_match', '!=', 0)
+            ->get();
+        $this->assertTrue($temporaryPositions->isNotEmpty());
     }
 }

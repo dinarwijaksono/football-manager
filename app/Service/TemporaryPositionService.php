@@ -80,7 +80,7 @@ class TemporaryPositionService
                 $home = TemporaryPosition::select('*')->where('club_id', $data->home_id)->first();
                 TemporaryPosition::where('club_id', $data->home_id)->update([
                     'number_of_match' => $home->number_of_match + 1,
-                    'win' => $home->draw + 1,
+                    'win' => $home->win + 1,
                     'gol_in' => $home->gol_in + $data->score_home,
                     'gol_out' => $home->gol_out + $data->score_away,
                     'point' => $home->point + 3,
@@ -90,16 +90,16 @@ class TemporaryPositionService
                 $away = TemporaryPosition::select('*')->where('club_id', $data->away_id)->first();
                 TemporaryPosition::where('club_id', $data->away_id)->update([
                     'number_of_match' => $away->number_of_match + 1,
-                    'lost' => $away->draw + 1,
-                    'gol_out' => $away->gol_in + $data->score_home,
-                    'gol_in' => $away->gol_out + $data->score_away,
+                    'lost' => $away->lost + 1,
+                    'gol_out' => $away->gol_out + $data->score_home,
+                    'gol_in' => $away->gol_in + $data->score_away,
                     'updated_at' => round(microtime(true) * 1000),
                 ]);
             } else {
                 $home = TemporaryPosition::select('*')->where('club_id', $data->home_id)->first();
                 TemporaryPosition::where('club_id', $data->home_id)->update([
                     'number_of_match' => $home->number_of_match + 1,
-                    'lost' => $home->draw + 1,
+                    'lost' => $home->lost + 1,
                     'gol_in' => $home->gol_in + $data->score_home,
                     'gol_out' => $home->gol_out + $data->score_away,
                     'updated_at' => round(microtime(true) * 1000),
@@ -108,9 +108,9 @@ class TemporaryPositionService
                 $away = TemporaryPosition::select('*')->where('club_id', $data->away_id)->first();
                 TemporaryPosition::where('club_id', $data->away_id)->update([
                     'number_of_match' => $away->number_of_match + 1,
-                    'win' => $away->draw + 1,
-                    'gol_out' => $away->gol_in + $data->score_home,
-                    'gol_in' => $away->gol_out + $data->score_away,
+                    'win' => $away->win + 1,
+                    'gol_out' => $away->gol_out + $data->score_home,
+                    'gol_in' => $away->gol_in + $data->score_away,
                     'point' => $away->point + 3,
                     'updated_at' => round(microtime(true) * 1000),
                 ]);
